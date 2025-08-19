@@ -1,0 +1,51 @@
+name: CI - One Click Dev Environments
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        template: [react-app, nextjs-app, node-api, python-api]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Node-based templates
+      - name: Setup Node.js
+        if: matrix.template == 'react-app' || matrix.template == 'nextjs-app' || matrix.template == 'node-api'
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Python-based template
+      - name: Setup Python
+        if: matrix.template == 'python-api'
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          cd templates/${{ matrix.template }}
+          if [ -f package.json ]; then npm install; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # Run tests / lint / build
+      - name: Run tests or build
+        run: |
+          cd templates/${{ matrix.template }}
+          if [ -f package.json ]; then npm run build || npm run dev -- --help; fi
+          if [ -f requirements.txt ]; then uvicorn main:app --host 127.0.0.1 --port 5000 --reload & sleep 5; curl http://127.0.0.1:5000/; fi
+
+      # Docker build check
+      - name: Build Docker image
+        run: |
+          cd templates/${{ matrix.template }}
+          docker-compose build
