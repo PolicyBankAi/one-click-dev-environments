@@ -1,0 +1,5 @@
+setup.sh → Installs dependencies
+
+run.sh → Runs selected template
+
+choose-template.sh → Selects which app to run
