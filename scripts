@@ -29,3 +29,18 @@ fi
 
 cd templates/$1-app || { echo "❌ Template not found"; exit 1; }
 docker-compose up --build
+
+#!/bin/bash
+echo "🌐 Choose a template to run:"
+select choice in "react-app" "nextjs-app" "node-api" "python-api"; do
+  case $choice in
+    "react-app"|"nextjs-app"|"node-api"|"python-api")
+      echo "🚀 Running $choice ..."
+      ./scripts/run.sh $choice
+      break
+      ;;
+    *)
+      echo "❌ Invalid choice"
+      ;;
+  esac
+done
