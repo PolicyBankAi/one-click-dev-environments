@@ -1,0 +1,12 @@
+one-click-dev-environments/
+│── README.md
+│── LICENSE
+│── .gitignore
+│── .devcontainer/
+│   ├── devcontainer.json
+│   └── Dockerfile
+│
+└── scripts/
+    ├── setup.sh
+    ├── run.sh
+    └── choose-template.sh
