@@ -1,0 +1,24 @@
+one-click-dev-environments/
+└── templates/
+    ├── react-app/
+    │   ├── docker-compose.yml
+    │   ├── package.json
+    │   └── src/
+    │       └── main.jsx
+    │
+    ├── nextjs-app/
+    │   ├── docker-compose.yml
+    │   ├── package.json
+    │   ├── pages/
+    │   │   └── index.js
+    │   └── next.config.js
+    │
+    ├── node-api/
+    │   ├── docker-compose.yml
+    │   ├── package.json
+    │   └── index.js
+    │
+    └── python-api/
+        ├── docker-compose.yml
+        ├── requirements.txt
+        └── main.py
