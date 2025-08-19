@@ -1,0 +1,20 @@
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+dist
+build
+
+# Python
+__pycache__/
+*.pyc
+.venv
+.env
+
+# VSCode & Devcontainer
+.vscode
+.devcontainer/*.log
+
+# Docker
+*.pid
+*.log
